@@ -10,21 +10,21 @@ function runMiddleware(req, res, fn) {
   return new Promise((resolve, reject) => {
     fn(req, res, (result) => {
       if (result instanceof Error) {
-        return reject(result)
+        return reject(result);
       }
 
-      return resolve(result)
-    })
-  })
+      return resolve(result);
+    });
+  });
 }
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import geoip from "geoip-country";
 import requestIp from "request-ip";
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   // Run the middleware
-  await runMiddleware(req, res, cors)
+  await runMiddleware(req, res, cors);
 
   const ip = requestIp.getClientIp(req);
 
